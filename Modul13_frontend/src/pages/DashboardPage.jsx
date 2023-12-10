@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { Alert, Col, Container, Row, Spinner, Stack } from "react-bootstrap";
 import { GetAllContents } from "../api/apiContent";
 import { getThumbnail } from "../api";
+// import { CreateReview } from "../api/apiReview";
+// import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 const DashboardPage = () => {
     const [contents, setContents] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    // const [clickReview, setClickReview] = useState(false);
     useEffect(() => {
         setIsLoading(true);
         GetAllContents()
@@ -17,6 +21,22 @@ const DashboardPage = () => {
             console.log(err);
         });
     }, []);
+
+    // const hanldeReview = (id) => {
+    //     setClickReview(true);
+    //     CreateReview({
+    //       id_content : id
+    //     })
+    //     .then((response) => {
+    //         setClickReview(false);
+    //         toast.success(response.message);
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //         setClickReview(false);
+    //         toast.warning(JSON.stringify(err.message));
+    //     });
+    // }
     
     return (
         <Container className="mt-4">
@@ -53,7 +73,23 @@ const DashboardPage = () => {
                                     <h5 className="card-title text-truncate">
                                         {content.title}
                                     </h5>
-                                    <p className="card-text">{content.description}</p>
+                                    <p className="card-text">
+                                        {content.description}
+                                    </p>
+                                    <div class="d-grid gap-2">
+                                        <Link
+                                            to={{
+                                                pathname: `/user/review`,
+                                                state: {
+                                                    reviewPage: true,
+                                                    contentId: content.id,
+                                                },
+                                            }}
+                                            className="btn btn-primary"
+                                        >
+                                            Review
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </Col>

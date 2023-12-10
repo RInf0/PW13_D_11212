@@ -25,9 +25,6 @@ class ContentController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function showContentbyUser($id) {
         $user = User::find($id);
         if(!$user){
@@ -41,10 +38,11 @@ class ContentController extends Controller
             'message' => 'Contents of '.$user->name.' Retrieved',
             'data' => $contents
         ],200);
-
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $storeData = $request->all();

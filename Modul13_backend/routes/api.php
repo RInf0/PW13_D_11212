@@ -30,3 +30,13 @@ Route::middleware('auth:api')->group(function(){
 
     Route::get('/contents/user/{id}',[App\Http\Controllers\Api\ContentController::class,'showContentbyUser']);
 });
+
+Route::middleware('auth:api')->group(function(){
+     Route::get('/reviews',[App\Http\Controllers\Api\ReviewController::class,'index']);
+     Route::post('/reviews',[App\Http\Controllers\Api\ReviewController::class,'store']);
+     Route::get('/reviews/{id}',[App\Http\Controllers\Api\ReviewController::class,'show']);
+     Route::put('/reviews/{id}',[App\Http\Controllers\Api\ReviewController::class,'update']);
+     Route::delete('/reviews/{id}',[App\Http\Controllers\Api\ReviewController::class,'destroy']);
+
+     Route::get('/reviews/user/{id}',[App\Http\Controllers\Api\ReviewController::class,'showReviewbyUser']);
+ });
